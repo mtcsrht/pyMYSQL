@@ -1,20 +1,39 @@
+import sys
 import mariadb
 import random
-    
-conn =  mariadb.connect(
-  host="127.0.0.1",
-  user="root",
-  password="",
-  database="atm"
-)
+
+
+class UserHandler:
+    def __init__(self, FirstName, LastName, CardNumber):
+        self.FirstName = FirstName
+        self.Lastname = LastName
+        self.CardNumber = CardNumber;
+
+
+try:
+    conn = mariadb.connect(
+        user="root",
+        password="",
+        host="localhost",
+        port=3306,
+        database="atm"
+
+    )
+except mariadb.Error as e:
+    print(f"Error connecting to MariaDB Platform: {e}")
+    sys.exit(1)
 print(conn)
+
 cur = conn.cursor()
 
+
 def generateCardNumber():
-    cardNumber = "5674"    
+    cardNum = "5674"
     for i in range(13):
-        cardNumber += str((random.randrange(0,9)))
-    return str(cardNumber)
+        cardNum += str((random.randrange(0,9)))
+
+    return str(cardNum)
+
 
 def registerToDB(FirstName, LastName, CardNumber, Pin):
     try:
@@ -22,6 +41,7 @@ def registerToDB(FirstName, LastName, CardNumber, Pin):
     except mariadb.Error as e: 
         print(f"Error: {e}")
     conn.commit()
+    print(f"{FirstName, LastName, CardNumber, Pin} succesfully insterted into DB")
 
 def pin():
     pinNum = ""
@@ -43,5 +63,10 @@ def registerMain():
     cardNumber = generateCardNumber()
     print(FName, LName, cardNumber, pinNum)
     registerToDB(FName, LName, cardNumber, pinNum)
+
+def loginMain():
+
+    login = UserHandler()
+    
 
 registerMain()
