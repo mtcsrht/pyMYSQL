@@ -7,7 +7,7 @@ class UserHandler:
     def __init__(self, FirstName, LastName, CardNumber):
         self.FirstName = FirstName
         self.Lastname = LastName
-        self.CardNumber = CardNumber;
+        self.CardNumber = CardNumber
 
 
 try:
