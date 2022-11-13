@@ -4,10 +4,10 @@ import random
 
 
 class UserHandler:
-    def __init__(self, FirstName, LastName, CardNumber):
-        self.FirstName = FirstName
-        self.Lastname = LastName
-        self.CardNumber = CardNumber
+    def __init__(self, firstName, lastName, cardNumber):
+        self.FirstName = firstName
+        self.Lastname = lastName
+        self.CardNumber = cardNumber
 
 
 try:
